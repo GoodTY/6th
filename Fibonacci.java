@@ -35,12 +35,35 @@ public class Fibonacci {
 
     public static int fibTailRec(int n) {
 
+        int fib0= 0, fib1=1, before, after, ans;
+
+        if (n == 0 || n == 1){
+            return n;
+        }
+        else {
+            before = fib0;
+            after =fib1;
+            ans = fib0 + fib1;
+            for (int i = 2; i < n+1; i++){
+                    ans= before + after;
+                    before = after;
+                    after = ans;
+            }
+            return ans;
+        }
+
         // Your code goes here ...
 
         // You may need to define a private, tail-recursive
         // helper method to call here ...
 
-        return 0;
+        /* private static int factTailRec(int acc, int n ){
+        if (n <= 0)
+            return acc;
+        else
+            return factRailRec(n* acc, n -1);
+         */
+
     }
 
 
