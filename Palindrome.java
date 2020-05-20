@@ -32,7 +32,7 @@ public class Palindrome {
         if (array_word.length%2 == 0) { // even
             int dif = 0;
             for (int i = 0; i < ((array_word.length / 2)); i++) {
-                if (array_word[start + i] != (array_word[array_word.length - i])) {
+                if (array_word[start + i] != (array_word[(array_word.length-1) - i])) {
                     dif++;
                 }
             }
@@ -46,7 +46,7 @@ public class Palindrome {
         else { // odd
             int dif = 0;
             for (int i = 0; i < ((array_word.length / 2) - 1); i++) {
-                if (array_word[start + i] != (array_word[array_word.length - i])) {
+                if (array_word[start + i] != (array_word[(array_word.length-1) - i])) {
                     dif++;
                 }
             }
