@@ -17,7 +17,7 @@ public class Palindrome {
 
     private static boolean isPalindrome(String as, int start, int end) {
         char[] array_word = new char[as.length()];
-        int count = 0;
+        int count = start;
         for(int i =0; i<array_word.length; i++) {
             if (isAlpha(array_word[i]) == true) {
                 array_word[count] = as.charAt(i);
@@ -29,12 +29,37 @@ public class Palindrome {
             array_word[i] = (char)toLower(array_word[i]);
         }
         //input array_word = [H, e, l, o] -> array_word = [h, e, l, o]
+        if (array_word.length%2 == 0) { // even
+            int dif = 0;
+            for (int i = 0; i < ((array_word.length / 2)); i++) {
+                if (array_word[start + i] != (array_word[array_word.length - i])) {
+                    dif++;
+                }
+            }
 
+            if (dif == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else { // odd
+            int dif = 0;
+            for (int i = 0; i < ((array_word.length / 2) - 1); i++) {
+                if (array_word[start + i] != (array_word[array_word.length - i])) {
+                    dif++;
+                }
+            }
 
+            if (dif == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //distinguish even or odd. first try
 
         // your code goes here ...
-
-        return false;
     }
 
     private static boolean isAlpha(final char ch) {
