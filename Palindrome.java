@@ -25,6 +25,11 @@ public class Palindrome {
             } // isAlpha == false -> It does not add 1 to count.
         }
         // input " Hel1o" -> array_word = [H, e, l, o]
+        for (int i=0; i < array_word.length; i++){
+            array_word[i] = (char)toLower(array_word[i]);
+        }
+        //input array_word = [H, e, l, o] -> array_word = [h, e, l, o]
+
 
 
         // your code goes here ...
