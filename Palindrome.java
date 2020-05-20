@@ -16,6 +16,16 @@ public class Palindrome {
     }
 
     private static boolean isPalindrome(String as, int start, int end) {
+        char[] array_word = new char[as.length()];
+        int count = 0;
+        for(int i =0; i<array_word.length; i++) {
+            if (isAlpha(array_word[i]) == true) {
+                array_word[count] = as.charAt(i);
+                count++;
+            } // isAlpha == false -> It does not add 1 to count.
+        }
+        // input " Hel1o" -> array_word = [H, e, l, o]
+
 
         // your code goes here ...
 
