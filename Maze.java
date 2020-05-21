@@ -47,9 +47,175 @@ public class Maze {
     }
 
     private boolean moveTo(int row, int col) {
+        Location position = entry;
+        int[] collect = null;
+        int count = 0;
+        int right = maze[position.row][position.col + 1];
+        int left = maze[position.row][position.col - 1];
+        int up = maze[position.row + 1][position.col];
+        int down = maze[position.row - 1][position.col];
+
+        if (position.row == 0) {
+            if (position.col == 0) { // 0,0
+                if (right == 1 || visited[position.row][position.col + 1] == true) { // 서쪽으로 이동 불가
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                        //움직일 곳이 없는 경우
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        position.row += position.row;
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                } else if (right == 0 && visited[position.row][position.col + 1] == true) {
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                        //움직일 곳이 없는 경우
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        position.row += position.row;
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                } else {
+                    moveTo(position.row, position.col + 1);
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row + 1, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                }
+            } else if (position.col == numCols) { // (0,1) 좌 하 움직이기 가능
+                if (left == 1 || visited[position.row][position.col - 1] == true) { // 동쪽으로 이동 불가
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                        //움직일 곳이 없는 경우
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        position.row += position.row;
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                } else if (left == 0 && visited[position.row][position.col - 1] == true) { // 동쪽 이동 불가
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                        //움직일 곳이 없는 경우
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        position.row += position.row;
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                } else { //동쪽 이동 가능
+                    moveTo(position.row, position.col + 1);
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row + 1, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                }
+
+            } else { // 좌 우 하 이동 가능
+                if (left == 1 || visited[position.row][position.col - 1] == true) { // 동쪽으로 이동 불가
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                        //움직일 곳이 없는 경우
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        position.row += position.row;
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                } else if (left == 0 && visited[position.row][position.col - 1] == true) { // 동쪽 이동 불가
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                        //움직일 곳이 없는 경우
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        position.row += position.row;
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                } else { //동쪽 이동 가능
+                    moveTo(position.row, position.col + 1);
+                    if (down == 1 || visited[position.row + 1][position.col] == true) { // 남쪽으로 이동 불가
+                        collect[count] = 0;
+                        count++;
+                    } else if (down == 0 && visited[position.row + 1][position.col] == false) {
+                        visited[position.row + 1][position.col] = true;
+                        moveTo(position.row + 1, position.col);
+                    } else { // down == 0 && visited true
+                        collect[count] += 0;
+                        count++;
+                    }
+                }
+            }
+            visited[position.row][position.col] = true;
+        }
+
+
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+        else if(position.row == numRows){
+            if (position.col == 0) {
+
+            }
+            else if (position.col == numCols) {
+
+            }
+            else {
+            }
+        }
+
+        else {
+            if (position.col == 0) {
+
+            }
+            else if (position.col == numCols){
+
+            }
+            else {
+
+            }
+        }
         /*
         1st 주변이 0이 4,3,2,1개 일 경우
-            col 과 row가 큰 곳으로 이동
+            모든 moveTo(0 좌표) 생성
         2nd 주변이 0이 없는 경우
             i) 주변에 passed가 1개 있는 경우
                passed로 이동
