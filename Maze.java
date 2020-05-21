@@ -47,40 +47,41 @@ public class Maze {
     }
 
     private boolean moveTo(int row, int col) {
-        boolean visitR = visited[row][col + 1], visitL = visited[row][col - 1],
-                visitU = visited[row - 1][col], visitD = visited[row + 1][col];
+        visited[row][col] = true;
         if (row == exit.row && col == exit.col) {
             return true;
         } else {
             if (row >= 0 || row < numRows || col >= 0 || col < numCols) {
+                if (row - 1 >= 0) {
+                    boolean visitU = visited[row - 1][col];
+                    int up = maze[row - 1][col];
+                    if ((up == 0 && visitU == false) && row - 1 >= 0) {
+                        if(moveTo(row-1, col )){return true;}
+                    }
+                }
                 if (col + 1 < numCols) {
+                    boolean visitR = visited[row][col + 1];
                     int right = maze[row][col + 1];
-                    if (right == 0 && visitR == false && col + 1 < numCols) {
-                        visited[row][col] = true;
-                        moveTo(row, col + 1);
+                    if ((right == 0 && visitR == false) && col + 1 < numCols) {
+                        if(moveTo(row, col + 1)){return true;}
+                    }
+                }
+
+                if (row + 1 < numRows) {
+                    boolean visitD = visited[row + 1][col];
+                    int down = maze[row + 1][col];
+                    if ((down == 0 && visitD == false) && row + 1 < numCols) {
+                        if(moveTo(row+1, col)){return true;}
                     }
                 }
                 if (col - 1 >= 0) {
+                    boolean visitL = visited[row][col - 1];
                     int left = maze[row][col - 1];
-                    if (left == 0 && visitL == false && col - 1 >= 0) {
-                        visited[row][col] = true;
-                        moveTo(row, col - 1);
+                    if ((left == 0 && visitL == false) && col - 1 >= 0) {
+                        if(moveTo(row, col - 1)){return true;}
                     }
                 }
-                if (row - 1 >= 0) {
-                    int up = maze[row - 1][col];
-                    if (up == 0 && visitU == false && row - 1 >= 0) {
-                        visited[row][col] = true;
-                        moveTo(row - 1, col);
-                    }
-                }
-                if (row + 1 < numRows) {
-                    int down = maze[row + 1][col];
-                    if (down == 0 && visitD == false && row + 1 < numCols) {
-                        visited[row][col] = true;
-                        moveTo(row + 1, col);
-                    }
-                }
+
             }
         }return false;
     }
