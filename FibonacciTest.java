@@ -14,7 +14,7 @@ class FibonacciTest {
     void test() {
 
         List<Integer> actual = IntStream.rangeClosed(0, 20)
-                         .mapToObj(cse2010.homework4.solution.Fibonacci::fibIter)
+                         .mapToObj(Fibonacci::fibIter)
                          .collect(Collectors.toList());
 
         List<Integer> expected = IntStream.rangeClosed(0, 20)
